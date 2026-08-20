@@ -5,12 +5,17 @@ import projects from "../data/projects";
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
 
+
+
+
   return (
-    <section id="work" className="projects-section">
+    <section
+      id="work"
+      className="projects-section"
+    >
       <div className="projects-header">
         <div className="section-label">
-          <span>04</span>
-          <h2>Selected Work</h2>
+          SELECTED WORK
         </div>
 
         <p className="projects-intro">
@@ -21,20 +26,34 @@ export default function Projects() {
       </div>
 
       <div className="projects-list">
-        {projects.map((project) => (
-          <motion.article
-            key={project.id}
+        {projects.map((project, index) => (
+          <motion.a
+            key={project.slug}
+            href={`/projects/${project.slug}`}
+            target="project-detail"
+            rel="noopener noreferrer"
             className="project-row"
-            onMouseEnter={() => setActiveProject(project)}
-            onMouseLeave={() => setActiveProject(null)}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            onMouseEnter={() =>
+              setActiveProject(project)
+            }
+            onMouseLeave={() =>
+              setActiveProject(null)
+            }
+            initial={{
+              opacity: 0,
+              y: 25,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
             viewport={{
               once: true,
               amount: 0.2,
             }}
             transition={{
-              duration: 0.7,
+              duration: 0.65,
+              delay: index * 0.08,
               ease: [0.22, 1, 0.36, 1],
             }}
           >
@@ -46,47 +65,41 @@ export default function Projects() {
               <div className="project-heading">
                 <h3>{project.title}</h3>
 
-                <span>{project.subtitle}</span>
+                <span>
+                  {project.category}
+                </span>
               </div>
 
               <p className="project-description">
-                {project.description}
+                {project.shortDescription}
               </p>
 
               <div className="project-tech">
-                {project.technologies.map((technology) => (
-                  <span key={technology}>
-                    {technology}
-                  </span>
-                ))}
+                {project.technologies.map(
+                  (technology) => (
+                    <span key={technology}>
+                      {technology}
+                    </span>
+                  )
+                )}
               </div>
             </div>
 
-            <a
-              href={project.demo}
-              className="project-link"
-              target="_blank"
-              rel="noreferrer"
-              onClick={(event) => {
-                if (project.demo === "#") {
-                  event.preventDefault();
-                }
-              }}
-            >
+            <span className="project-link">
               VIEW ↗
-            </a>
-          </motion.article>
+            </span>
+          </motion.a>
         ))}
       </div>
 
       <AnimatePresence>
-        {activeProject && (
+        {activeProject?.image && (
           <motion.div
             className="project-preview"
             initial={{
               opacity: 0,
-              scale: 0.92,
-              y: 15,
+              scale: 0.96,
+              y: 12,
             }}
             animate={{
               opacity: 1,
@@ -95,38 +108,37 @@ export default function Projects() {
             }}
             exit={{
               opacity: 0,
-              scale: 0.94,
-              y: 10,
+              scale: 0.96,
+              y: 12,
             }}
             transition={{
-              duration: 0.25,
+              duration: 0.22,
+              ease: "easeOut",
             }}
           >
             <div className="preview-image">
               <img
                 src={activeProject.image}
-                alt={activeProject.title}
-                loading="lazy"
-                decoding="async"
-            />
+                alt={`${activeProject.title} project preview`}
+                loading="eager"
+              />
             </div>
 
             <div className="preview-content">
-              <span>PROJECT {activeProject.id}</span>
+              <span>
+                {activeProject.category}
+              </span>
 
-              <h4>{activeProject.title}</h4>
+              <h4>
+                {activeProject.title}
+              </h4>
 
               <a
-                href={activeProject.github}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(event) => {
-                  if (activeProject.github === "#") {
-                    event.preventDefault();
-                  }
-                }}
+                href={`/projects/${activeProject.slug}`}
+                target="project-detail"
+                rel="noopener noreferrer"
               >
-                GITHUB ↗
+                OPEN PROJECT ↗
               </a>
             </div>
           </motion.div>

@@ -13,8 +13,29 @@ import GithubActivity from "./components/GithubActivity";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
+import ProjectDetails from "./pages/ProjectDetails";
 
 function App() {
+  const isProjectPage =
+    window.location.pathname.startsWith("/projects/");
+
+  if (isProjectPage) {
+    return (
+      <div className="app">
+
+        <div className="network-background">
+          <CustomCursor />
+          <NetworkBackground />
+        </div>
+
+        <div className="page-content">
+          <ProjectDetails />
+        </div>
+
+      </div>
+    );
+  }
+
   return (
     <main className="app">
       <CustomCursor />
@@ -40,5 +61,4 @@ function App() {
     </main>
   );
 }
-
 export default App;
