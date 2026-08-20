@@ -4341,3 +4341,10 @@ body {
 .certificate-nav-btn:hover { color: #fff; }
 @media (max-width: 768px) { .certificate-modal-backdrop { padding: 20px; } .certificate-modal-close { top: 20px; right: 20px; } .certificate-modal-image { height: 60vh; } .certificate-modal-caption h4 { font-size: 15px; } }
 
+
+/* Certificate Modal Loading Spinner */
+.certificate-modal-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.certificate-modal-spinner { width: 28px; height: 28px; border: 2px solid rgba(210, 178, 123, 0.2); border-top-color: #d2b27b; border-radius: 50%; animation: cert-spin 0.7s linear infinite; }
+@keyframes cert-spin { to { transform: rotate(360deg); } }
+.certificate-modal-image { transition: opacity 0.25s ease; }
+

@@ -4,7 +4,8 @@ const certifications = [
         title: "AESTER ALPHA AI SUMMIT",
         issuer: "Aester",
         year: "2026",
-        image: "/certificates/AESTER-ALPHA-AI-SUMMIT.png",
+        thumbnail: "/images/certificates/aester-alpha-ai-summit.webp",
+        full: "/images/certificates/aester-alpha-ai-summit-full.webp",
     },
 
     {
@@ -12,7 +13,8 @@ const certifications = [
         title: "BUILD WITH AI",
         issuer: "AI / Technology Program",
         year: "2026",
-        image: "/certificates/Build-with-AI.png",
+        thumbnail: "/images/certificates/build-with-ai.webp",
+        full: "/images/certificates/build-with-ai-full.webp",
     },
 
     {
@@ -20,8 +22,8 @@ const certifications = [
         title: "GOOGLE CLOUD GEN AI ACADEMY APAC 2026 — COHORT 2",
         issuer: "Google Cloud",
         year: "2026",
-        image:
-            "/certificates/Google-Cloud-Gen-AI-Academy-APAC-2026-Cohort2.png",
+        thumbnail: "/images/certificates/google-cloud-gen-ai-apac.webp",
+        full: "/images/certificates/google-cloud-gen-ai-apac-full.webp",
     },
 
     {
@@ -29,8 +31,8 @@ const certifications = [
         title: "HACKOCEAN 2026 — NATIONAL LEVEL FRONTEND HACKATHON",
         issuer: "HackOcean",
         year: "2026",
-        image:
-            "/certificates/HackOcean-2026-National-Level-Frontend-Hackathon.png",
+        thumbnail: "/images/certificates/hackocean-2026.webp",
+        full: "/images/certificates/hackocean-2026-full.webp",
     },
 
     {
@@ -38,7 +40,8 @@ const certifications = [
         title: "MICROSOFT AI SKILL FEST 2026",
         issuer: "Microsoft",
         year: "2026",
-        image: "/certificates/Microsoft-AI-skill-fest-2026.png",
+        thumbnail: "/images/certificates/microsoft-ai-skill-fest.webp",
+        full: "/images/certificates/microsoft-ai-skill-fest-full.webp",
     },
 
     {
@@ -46,8 +49,9 @@ const certifications = [
         title: "Q-HACKATHON 2026",
         issuer: "Quantum University, Roorkee",
         year: "2026",
-        image: "/certificates/Q-HACKATHON-2026.png",
+        thumbnail: "/images/certificates/q-hackathon-2026.webp",
+        full: "/images/certificates/q-hackathon-2026-full.webp",
     },
 ];
 
-export default certifications;
+export default certifications;

@@ -4,6 +4,12 @@ import certifications from "../data/certifications";
 
 export default function Certifications() {
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [fullImageLoaded, setFullImageLoaded] = useState(false);
+
+  const openModal = useCallback((index) => {
+    setFullImageLoaded(false);
+    setSelectedIndex(index);
+  }, []);
 
   const closeModal = useCallback(() => {
     setSelectedIndex(null);
@@ -11,11 +17,13 @@ export default function Certifications() {
 
   const showPrevious = useCallback((e) => {
     if (e) e.stopPropagation();
+    setFullImageLoaded(false);
     setSelectedIndex((prev) => (prev === null ? null : (prev === 0 ? certifications.length - 1 : prev - 1)));
   }, []);
 
   const showNext = useCallback((e) => {
     if (e) e.stopPropagation();
+    setFullImageLoaded(false);
     setSelectedIndex((prev) => (prev === null ? null : (prev === certifications.length - 1 ? 0 : prev + 1)));
   }, []);
 
@@ -59,7 +67,7 @@ export default function Certifications() {
           <motion.article
             key={certificate.id}
             className="certificate-card"
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => openModal(index)}
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{
@@ -75,7 +83,7 @@ export default function Certifications() {
           >
             <div className="certificate-image-wrapper">
               <img
-                src={certificate.image}
+                src={certificate.thumbnail}
                 alt={certificate.title}
                 className="certificate-image"
                 loading="lazy"
@@ -137,10 +145,17 @@ export default function Certifications() {
               transition={{ duration: 0.3, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
             >
+              {!fullImageLoaded && (
+                <div className="certificate-modal-loading">
+                  <div className="certificate-modal-spinner" />
+                </div>
+              )}
               <img
-                src={certifications[selectedIndex].image}
+                src={certifications[selectedIndex].full}
                 alt={certifications[selectedIndex].title}
                 className="certificate-modal-image"
+                style={{ opacity: fullImageLoaded ? 1 : 0 }}
+                onLoad={() => setFullImageLoaded(true)}
               />
               <div className="certificate-modal-caption">
                 <h4>{certifications[selectedIndex].title}</h4>
