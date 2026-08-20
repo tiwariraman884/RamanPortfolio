@@ -3,13 +3,37 @@ import { useState } from "react";
 
 export default function Contact() {
   const [formStatus, setFormStatus] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const name = formData.get("name")?.trim();
+    const email = formData.get("email")?.trim();
+    const subject = formData.get("subject")?.trim();
+    const message = formData.get("message")?.trim();
 
-    setFormStatus(
-      "Thanks for reaching out. I'll get back to you soon."
-    );
+    const newErrors = {};
+
+    if (!name) newErrors.name = "Please enter your name.";
+    if (!email) {
+      newErrors.email = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+    if (!subject) newErrors.subject = "Please enter a subject.";
+    if (!message || message.length < 10) newErrors.message = "Please enter a message (at least 10 characters).";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setFormStatus("");
+      return;
+    }
+
+    setErrors({});
+    setFormStatus("MESSAGE SENT ✓\n\nThanks for reaching out. I'll get back to you soon.");
+    event.target.reset();
   };
 
   return (
@@ -94,6 +118,7 @@ export default function Contact() {
         <motion.form
           className="contact-form"
           onSubmit={handleSubmit}
+          noValidate
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{
@@ -115,8 +140,8 @@ export default function Contact() {
               name="name"
               type="text"
               placeholder="Your name"
-              required
             />
+            {errors.name && <span className="form-error">{errors.name}</span>}
           </div>
 
           <div className="form-row">
@@ -129,21 +154,22 @@ export default function Contact() {
               name="email"
               type="email"
               placeholder="you@example.com"
-              required
             />
+            {errors.email && <span className="form-error">{errors.email}</span>}
           </div>
 
           <div className="form-row">
             <label htmlFor="subject">
-              SUBJECT
+              SUBJECT *
             </label>
 
             <input
               id="subject"
               name="subject"
               type="text"
-              placeholder="What's this about?"
+              placeholder="What would you like to discuss?"
             />
+            {errors.subject && <span className="form-error">{errors.subject}</span>}
           </div>
 
           <div className="form-row">
@@ -155,9 +181,9 @@ export default function Contact() {
               id="message"
               name="message"
               rows="5"
-              placeholder="Tell me about it..."
-              required
+              placeholder="Tell me briefly what you'd like to discuss..."
             />
+            {errors.message && <span className="form-error">{errors.message}</span>}
           </div>
 
           <button type="submit" className="contact-submit">
@@ -165,7 +191,7 @@ export default function Contact() {
           </button>
 
           {formStatus && (
-            <p className="form-status">
+            <p className="form-status" style={{ whiteSpace: "pre-wrap" }}>
               {formStatus}
             </p>
           )}

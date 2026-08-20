@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import projects from "../data/projects";
+import { projects } from "../data/projects";
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
 
+  useEffect(() => {
+    projects.forEach((project) => {
+      if (!project.image) return;
 
+      const image = new Image();
 
+      image.src = project.image;
+    });
+  }, []);
 
   return (
     <section
@@ -98,21 +105,18 @@ export default function Projects() {
             className="project-preview"
             initial={{
               opacity: 0,
-              scale: 0.96,
-              y: 12,
+              scale: 0.97,
             }}
             animate={{
               opacity: 1,
               scale: 1,
-              y: 0,
             }}
             exit={{
               opacity: 0,
-              scale: 0.96,
-              y: 12,
+              scale: 0.97,
             }}
             transition={{
-              duration: 0.22,
+              duration: 0.16,
               ease: "easeOut",
             }}
           >
@@ -121,6 +125,7 @@ export default function Projects() {
                 src={activeProject.image}
                 alt={`${activeProject.title} project preview`}
                 loading="eager"
+                decoding="async"
               />
             </div>
 

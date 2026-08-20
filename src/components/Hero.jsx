@@ -22,7 +22,7 @@ export default function Hero() {
           animate="visible"
           transition={{ duration: 0.8, delay: 0.15 }}
         >
-          COMPUTER SCIENCE — ROORKEE INSTITUTE OF TECHNOLOGY
+          COMPUTER SCIENCE STUDENT — AI / FULL-STACK DEVELOPER
         </motion.p>
 
         <motion.h1
@@ -44,41 +44,33 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="hero-quote"
+          className="hero-description"
           variants={reveal}
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.8, delay: 0.65 }}
         >
-          "Build with curiosity.
-          <br />
-          Solve with purpose."
-        </motion.p>
-
-        <motion.p
-          className="hero-description"
-          variants={reveal}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          Computer Science student, developer, hackathon builder,
-          and AI enthusiast creating practical technology for
-          real-world problems.
+          Building practical software across artificial intelligence,
+          machine learning, and modern web development.
         </motion.p>
 
         <motion.div
           className="hero-actions"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
         >
           <a href="#work" className="hero-button">
             VIEW WORK ↗
           </a>
 
-          <a href="#contact" className="hero-button secondary">
-            CONTACT
+          <a 
+            href="/resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hero-button secondary"
+          >
+            RESUME ↗
           </a>
         </motion.div>
       </div>

@@ -25,8 +25,8 @@ export default function CustomCursor() {
     };
 
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.18;
-      currentY += (mouseY - currentY) * 0.18;
+      currentX += (mouseX - currentX) * 0.08;
+      currentY += (mouseY - currentY) * 0.08;
 
       cursor.style.left = `${currentX}px`;
       cursor.style.top = `${currentY}px`;

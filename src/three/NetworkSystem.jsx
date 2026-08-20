@@ -113,13 +113,16 @@ export default function NetworkSystem() {
       Math.sin(time * 0.18) * 0.035;
 
     /*
-      Subtle mouse parallax.
+      Subtle mouse parallax with smooth lerp.
     */
-    networkRef.current.position.x =
-      mouse.x * 0.18;
+    const targetX = mouse.x * 0.25;
+    const targetY = mouse.y * 0.25;
 
-    networkRef.current.position.y =
-      mouse.y * 0.12;
+    networkRef.current.position.x += 
+      (targetX - networkRef.current.position.x) * 0.05;
+
+    networkRef.current.position.y += 
+      (targetY - networkRef.current.position.y) * 0.05;
   });
 
   const connectionCount =
