@@ -4,7 +4,7 @@ const projects = [
         slug: "ibm-z-fraud-detection",
         title: "IBM Z Fraud Detection",
         category: "REAL-TIME CREDIT CARD FRAUD DETECTION",
-        image: "/images/projects/IBM-Z-Fraud.png",
+        image: "/images/projects/IBM-Z-Fraud.webp",
 
         shortDescription:
             "A machine-learning based fraud detection system that evaluates financial transactions and returns real-time fraud risk predictions through a FastAPI backend.",
@@ -53,7 +53,7 @@ const projects = [
         slug: "nutriguard",
         title: "NutriGuard",
         category: "AI-POWERED FOOD SAFETY & NUTRITION",
-        image: "/images/projects/NutriGuard.png",
+        image: "/images/projects/NutriGuard.webp",
 
         shortDescription:
             "A food intelligence platform exploring OCR, barcode scanning, nutrition analysis, and AI-assisted guidance to help users make safer and more informed food choices.",
@@ -100,8 +100,8 @@ const projects = [
         id: "03",
         slug: "greenstep-india",
         title: "GreenStep India",
-        category: "CARBON FOOTPRINT PLATFORM",
-        image: "/images/projects/GreenStep.png",
+        category: "CARBON FOOTPRINT & RENEWABLE TRACKING",
+        image: "/images/projects/GreenStep.webp",
         shortDescription:
             "A web platform designed to help users understand and reduce their environmental impact through carbon-footprint tracking and practical sustainability guidance.",
 
@@ -147,8 +147,8 @@ const projects = [
         id: "04",
         slug: "freshwater-health-monitor",
         title: "Freshwater Health Monitor",
-        category: "COMMUNITY WATER MONITORING PLATFORM",
-        image: "/images/projects/Freshwater.png",
+        category: "REAL-TIME WATER QUALITY MONITORING",
+        image: "/images/projects/Freshwater.webp",
 
         shortDescription:
             "A citizen-driven platform for reporting freshwater pollution, sharing observations, uploading evidence, and tracking the health of local water bodies.",

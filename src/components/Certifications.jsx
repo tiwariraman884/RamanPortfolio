@@ -1,7 +1,45 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import certifications from "../data/certifications";
 
 export default function Certifications() {
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const closeModal = useCallback(() => {
+    setSelectedIndex(null);
+  }, []);
+
+  const showPrevious = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setSelectedIndex((prev) => (prev === null ? null : (prev === 0 ? certifications.length - 1 : prev - 1)));
+  }, []);
+
+  const showNext = useCallback((e) => {
+    if (e) e.stopPropagation();
+    setSelectedIndex((prev) => (prev === null ? null : (prev === certifications.length - 1 ? 0 : prev + 1)));
+  }, []);
+
+  useEffect(() => {
+    if (selectedIndex === null) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowLeft") showPrevious();
+      if (e.key === "ArrowRight") showNext();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedIndex, closeModal, showPrevious, showNext]);
+
   return (
     <section className="certifications-section">
       <div className="certifications-header">
@@ -21,6 +59,7 @@ export default function Certifications() {
           <motion.article
             key={certificate.id}
             className="certificate-card"
+            onClick={() => setSelectedIndex(index)}
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{
@@ -32,6 +71,7 @@ export default function Certifications() {
               delay: index * 0.08,
               ease: [0.22, 1, 0.36, 1],
             }}
+            style={{ cursor: "pointer" }}
           >
             <div className="certificate-image-wrapper">
               <img
@@ -51,10 +91,82 @@ export default function Certifications() {
                   {certificate.issuer} · {certificate.year}
                 </p>
               </div>
+              {/* Optional credential link logic to stop propagation */}
+              {certificate.url && (
+                <a 
+                  href={certificate.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="certificate-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  VIEW CREDENTIAL ↗
+                </a>
+              )}
             </div>
           </motion.article>
         ))}
       </div>
+
+      <AnimatePresence>
+        {selectedIndex !== null && (
+          <motion.div
+            className="certificate-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={closeModal}
+          >
+            <button
+              className="certificate-modal-close"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+              aria-label="Close modal"
+            >
+              × CLOSE
+            </button>
+
+            <motion.div
+              className="certificate-modal-content"
+              initial={{ scale: 0.96 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.96 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={certifications[selectedIndex].image}
+                alt={certifications[selectedIndex].title}
+                className="certificate-modal-image"
+              />
+              <div className="certificate-modal-caption">
+                <h4>{certifications[selectedIndex].title}</h4>
+                <p>{certifications[selectedIndex].issuer}</p>
+              </div>
+
+              <div className="certificate-modal-nav">
+                <button
+                  className="certificate-nav-btn"
+                  onClick={showPrevious}
+                  aria-label="Previous certificate"
+                >
+                  ← PREVIOUS
+                </button>
+                <button
+                  className="certificate-nav-btn"
+                  onClick={showNext}
+                  aria-label="Next certificate"
+                >
+                  NEXT →
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
