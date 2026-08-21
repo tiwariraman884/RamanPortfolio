@@ -27,7 +27,7 @@ const projects = [
             "Financial fraud is increasing in digital transactions, making it difficult to manually identify suspicious transactions quickly and accurately. Traditional rule-based systems can generate false positives and may fail to detect new fraud patterns. The IBM Z Fraud Detection project addresses this problem by using machine learning to analyze transaction patterns in real time and identify potentially fraudulent transactions, enabling faster and more reliable fraud detection.",
 
         solution:
-            "IBM Z Fraud Detection uses a machine-learning-based approach to automatically identify suspicious credit-card transactions.** A **Random Forest model** analyzes transaction features and predicts the probability of fraud. The trained model is deployed through a **FastAPI `/predict` endpoint**, enabling real-time transaction analysis and classification as **fraudulent or legitimate**. This helps reduce manual monitoring, detect suspicious patterns faster, and support timely fraud prevention.",
+            "IBM Z Fraud Detection uses a machine-learning-based approach to automatically identify suspicious credit-card transactions. A Random Forest model analyzes transaction features and predicts the probability of fraud. The trained model is deployed through a FastAPI /predict endpoint, enabling real-time transaction analysis and classification as fraudulent or legitimate. This helps reduce manual monitoring, detect suspicious patterns faster, and support timely fraud prevention.",
 
         features: [
             "Transaction Fraud Detection — Classifies transactions as fraud or legitimate.",
