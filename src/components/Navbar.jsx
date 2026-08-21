@@ -153,7 +153,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href= {RESUME_URL}
+            href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleNavClick}
