@@ -50,7 +50,8 @@ export default function Hero() {
           animate="visible"
           transition={{ duration: 0.8, delay: 0.65 }}
         >
-          Building practical software across artificial intelligence,
+          Building practical software
+          across artificial intelligence,
           machine learning, and modern web development.
         </motion.p>
 

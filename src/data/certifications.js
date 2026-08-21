@@ -54,4 +54,4 @@ const certifications = [
     },
 ];
 
-export default certifications;
+export default certifications;

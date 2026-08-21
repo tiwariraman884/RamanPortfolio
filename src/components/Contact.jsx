@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+
 import { useState } from "react";
 
 export default function Contact() {
@@ -81,7 +82,9 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
         >
           <span className="contact-small-label">
+            <h3>
             FIND ME ONLINE
+            </h3>
           </span>
 
           <a
@@ -97,7 +100,9 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <h3>
               GITHUB ↗
+              </h3>
             </a>
 
             <a
@@ -105,12 +110,14 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <h3>
               LINKEDIN ↗
+              </h3>
             </a>
           </div>
 
           <div className="contact-location">
-            <span>BASED IN</span>
+            <span><h3>BASED IN</h3></span>
             <strong>ROORKEE, INDIA</strong>
           </div>
         </motion.div>
@@ -132,7 +139,7 @@ export default function Contact() {
         >
           <div className="form-row">
             <label htmlFor="name">
-              NAME *
+              <h3>NAME *</h3>
             </label>
 
             <input
@@ -146,8 +153,8 @@ export default function Contact() {
 
           <div className="form-row">
             <label htmlFor="email">
-              EMAIL *
-            </label>
+              <h3>EMAIL *</h3>          
+              </label>
 
             <input
               id="email"
@@ -160,7 +167,7 @@ export default function Contact() {
 
           <div className="form-row">
             <label htmlFor="subject">
-              SUBJECT *
+              <h3>SUBJECT *</h3>
             </label>
 
             <input
@@ -174,7 +181,7 @@ export default function Contact() {
 
           <div className="form-row">
             <label htmlFor="message">
-              MESSAGE *
+              <h3>MESSAGE *</h3>
             </label>
 
             <textarea
@@ -187,7 +194,7 @@ export default function Contact() {
           </div>
 
           <button type="submit" className="contact-submit">
-            SEND MESSAGE →
+            <h3>SEND MASSAGE</h3> →
           </button>
 
           {formStatus && (

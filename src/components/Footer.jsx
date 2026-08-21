@@ -38,36 +38,42 @@ export default function Footer() {
       >
         <div className="footer-utility-links">
           <a href="#contact">
+             <h2>
             SEND MESSAGE →
+            </h2>
           </a>
 
           <a
             href="https://www.linkedin.com/in/raman-kumar-tiwari-698064370"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <h2>
             LINKEDIN →
+            </h2>
           </a>
 
           <a
             href="https://github.com/tiwariraman884"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <h2>
             GITHUB →
+            </h2>
           </a>
 
           <a
             href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <h2>
             DOWNLOAD RÉSUMÉ →
+            </h2>
           </a>
         </div>
 
-        <div className="footer-response">
+        <div className="footer-response"> <h2>
           RESPONSE WITHIN 24 H · IST
+          </h2>
         </div>
       </motion.div>
 
@@ -91,11 +97,15 @@ export default function Footer() {
         }}
       >
         <blockquote>
+          <h6>
           “Build with purpose. Create something that matters.”
+          </h6>
         </blockquote>
 
         <span>
+          <h2>
           — RAMAN KUMAR TIWARI
+          </h2>
         </span>
       </motion.div>
 
@@ -109,37 +119,42 @@ export default function Footer() {
             href="https://github.com/tiwariraman884"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <h2>
             GITHUB
+            </h2>
           </a>
 
           <a
             href="https://www.linkedin.com/in/raman-kumar-tiwari-698064370"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <h2>
             LINKEDIN
+            </h2>
           </a>
 
           <a
             href={`mailto:${EMAIL}`}
-          >
+          ><h2>
             EMAIL
+            </h2>
           </a>
 
           <a
             href={RESUME_URL}
             target="_blank"
             rel="noopener noreferrer"
-          >
-            RÉSUMÉ
+          ><h2>
+            RESUME
+            </h2>
           </a>
 
           <a
             href="#top"
             onClick={handleBackToTop}
-          >
+          ><h2>
             TOP ↑
+            </h2>
           </a>
         </div>
       </div>

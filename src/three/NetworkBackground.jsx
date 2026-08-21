@@ -19,8 +19,6 @@ export default function NetworkBackground() {
           alpha: true,
         }}
       >
-        <color attach="background" args={["#080808"]} />
-
         <Scene />
       </Canvas>
     </div>

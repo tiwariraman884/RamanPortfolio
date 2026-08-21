@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 
+
 const recognitions = [
   {
     year: "2026",
@@ -135,7 +136,9 @@ export default function Recognition() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  LINKEDIN POST ↗
+                  <h4>
+                    LINKEDIN POST ↗
+                  </h4>
                 </a>
               )}
             </div>
