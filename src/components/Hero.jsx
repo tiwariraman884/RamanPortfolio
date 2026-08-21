@@ -94,11 +94,19 @@ export default function Hero() {
       >
         <div className="image-glow" />
 
-        <img
-          src="/profile.png"
-          alt="Raman Kumar Tiwari"
-          className="hero-image"
-        />
+        <picture>
+          <source srcSet="/profile.webp" type="image/webp" />
+          <img
+            src="/profile.png"
+            alt="Raman Kumar Tiwari"
+            className="hero-image"
+            width={623}
+            height={1025}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </motion.div>
     </section>
   );

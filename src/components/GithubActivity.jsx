@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const GITHUB_USERNAME = "tiwariraman884";
@@ -113,6 +113,8 @@ export default function GithubActivity() {
   const [repositories, setRepositories] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const sectionRef = useRef(null);
+  const fetchedRef = useRef(false);
 
   const loadGithubData = async () => {
     try {
@@ -167,24 +169,35 @@ export default function GithubActivity() {
   };
 
   useEffect(() => {
-    const initialLoad = setTimeout(() => {
-      loadGithubData();
-    }, 0);
+    const el = sectionRef.current;
+    if (!el) return;
 
-    /*
-      Refresh approximately once per hour.
-      The contribution API itself may cache for up to
-      around one hour.
-    */
-    const refreshInterval = setInterval(
-      loadGithubData,
-      60 * 60 * 1000
+    /* Defer fetch until section approaches viewport.
+       This removes GitHub API calls from the critical path. */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !fetchedRef.current) {
+          fetchedRef.current = true;
+          observer.disconnect();
+          loadGithubData();
+
+          /* Refresh approximately once per hour */
+          const refreshInterval = setInterval(loadGithubData, 60 * 60 * 1000);
+          el._ghRefreshInterval = refreshInterval;
+        }
+      },
+      { rootMargin: "200px" }
     );
 
+    observer.observe(el);
+
     return () => {
-      clearTimeout(initialLoad);
-      clearInterval(refreshInterval);
+      observer.disconnect();
+      if (el._ghRefreshInterval) {
+        clearInterval(el._ghRefreshInterval);
+      }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const weeks = useMemo(
@@ -210,7 +223,7 @@ export default function GithubActivity() {
   }, [contributions]);
 
   return (
-    <section className="github-section">
+    <section className="github-section" ref={sectionRef}>
       <div className="github-header">
         <div className="section-label">
           <span>09</span>

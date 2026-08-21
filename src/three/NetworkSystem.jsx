@@ -3,16 +3,28 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
 /* ═══════════════════════════════════════════════
-   CONSTANTS
+   ADAPTIVE PARTICLE COUNTS BY VIEWPORT
+   Determined once at module load — no Math.random().
+   Mobile: ≤768px → 140 particles
+   Tablet: ≤1024px → 260 particles
+   Desktop: else → 340 particles
 ═══════════════════════════════════════════════ */
-const PARTICLE_COUNT      = 340;
+function getParticleCount() {
+  if (typeof window === "undefined") return 340;
+  const w = window.innerWidth;
+  if (w <= 768) return 140;
+  if (w <= 1024) return 260;
+  return 340;
+}
+
+const PARTICLE_COUNT      = getParticleCount();
 const CONNECTION_DISTANCE = 2.9;
 const CONN_DIST_SQ        = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
 
 /* Scene bounds — spread across generous volume */
 const BOUNDS = { x: 10, y: 7.5, z: 5 };
 
-/* Speed ranges (units / second) — slower, smooth, deliberate for a premium feel */
+/* Speed ranges (units / second) */
 const SPEED_MIN = 0.40;
 const SPEED_MAX = 1.20;
 
@@ -28,18 +40,15 @@ function pr(seed) {
 /* ═══════════════════════════════════════════════
    CIRCULAR GLOW TEXTURE
    Built once at module level via OffscreenCanvas.
-   Falls back to a plain ImageData if OffscreenCanvas
-   is unavailable (SSR / old browsers).
 ═══════════════════════════════════════════════ */
 function makeGlowTexture() {
-  const size = 256; /* larger canvas = sharper glow at bigger rendered size */
+  const size = 256;
   let ctx;
 
   if (typeof OffscreenCanvas !== "undefined") {
     const oc = new OffscreenCanvas(size, size);
     ctx = oc.getContext("2d");
   } else {
-    /* Fallback: create an in-memory canvas */
     const el = document.createElement("canvas");
     el.width  = size;
     el.height = size;
@@ -48,12 +57,12 @@ function makeGlowTexture() {
 
   const half = size / 2;
   const grad = ctx.createRadialGradient(half, half, 0, half, half, half);
-  grad.addColorStop(0.00, "rgba(255, 255, 255, 1.00)"); /* pure white core */
-  grad.addColorStop(0.15, "rgba(250, 235, 215, 1.00)"); /* bright champagne inner */
-  grad.addColorStop(0.35, "rgba(220, 190, 150, 0.95)"); /* strong champagne mid */
-  grad.addColorStop(0.60, "rgba(180, 140, 100, 0.70)"); /* wide warm outer glow */
-  grad.addColorStop(0.85, "rgba(130,  90,  60, 0.35)"); /* soft halo edge */
-  grad.addColorStop(1.00, "rgba(  0,   0,   0, 0.00)"); /* transparent edge */
+  grad.addColorStop(0.00, "rgba(255, 255, 255, 1.00)");
+  grad.addColorStop(0.15, "rgba(250, 235, 215, 1.00)");
+  grad.addColorStop(0.35, "rgba(220, 190, 150, 0.95)");
+  grad.addColorStop(0.60, "rgba(180, 140, 100, 0.70)");
+  grad.addColorStop(0.85, "rgba(130,  90,  60, 0.35)");
+  grad.addColorStop(1.00, "rgba(  0,   0,   0, 0.00)");
 
   ctx.clearRect(0, 0, size, size);
   ctx.fillStyle = grad;
@@ -67,39 +76,27 @@ function makeGlowTexture() {
 const GLOW_TEXTURE = makeGlowTexture();
 
 /* ═══════════════════════════════════════════════
-   PER-PARTICLE DATA
-   Built once at module level. Each particle has:
-   - position (x, y, z)
-   - current velocity (vx, vy, vz)
-   - target velocity  (targetVx, targetVy, targetVz)
-   - lerp speed  (lerpRate — differs per particle)
-   - oscillation (phase, frequency, amplitude per axis)
-   - direction-change timer
-   - size category
+   PER-PARTICLE DATA — built once at module level
 ═══════════════════════════════════════════════ */
 function buildParticleData() {
   const data = [];
 
   for (let i = 0; i < PARTICLE_COUNT; i++) {
-    /* ── Initial position spread across full volume ── */
     const px = (pr(i * 7 + 1) - 0.5) * BOUNDS.x * 2;
     const py = (pr(i * 7 + 2) - 0.5) * BOUNDS.y * 2;
     const pz = (pr(i * 7 + 3) - 0.5) * BOUNDS.z * 2;
 
-    /* ── Speed scalar — different per particle ── */
     const speed = SPEED_MIN + pr(i * 7 + 7) * (SPEED_MAX - SPEED_MIN);
 
-    /* Direction vector (random unit-ish) */
     const dx = pr(i * 7 + 4) - 0.5;
     const dy = pr(i * 7 + 5) - 0.5;
-    const dz = (pr(i * 7 + 6) - 0.5) * 0.8; /* slightly less Z */
+    const dz = (pr(i * 7 + 6) - 0.5) * 0.8;
     const dLen = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
 
     const vx = (dx / dLen) * speed;
     const vy = (dy / dLen) * speed;
     const vz = (dz / dLen) * speed;
 
-    /* ── Per-particle oscillation ── */
     const oscPhaseX = pr(i * 13 + 1) * Math.PI * 2;
     const oscPhaseY = pr(i * 13 + 2) * Math.PI * 2;
     const oscPhaseZ = pr(i * 13 + 3) * Math.PI * 2;
@@ -110,13 +107,9 @@ function buildParticleData() {
     const oscAmpY   = 0.08 + pr(i * 13 + 8) * 0.10;
     const oscAmpZ   = 0.06 + pr(i * 13 + 9) * 0.08;
 
-    /* ── Direction-change interval: 1.0 – 3.5 s ── */
     const changeInterval = 1.0 + pr(i * 13 + 10) * 2.5;
-    /* Stagger so particles never all change simultaneously */
     const nextChangeAt   = pr(i * 13 + 11) * changeInterval;
-
-    /* ── Lerp rate: how fast it smoothly turns ── */
-    const lerpRate = 0.010 + pr(i * 19 + 3) * 0.012;
+    const lerpRate       = 0.010 + pr(i * 19 + 3) * 0.012;
 
     data.push({
       x: px, y: py, z: pz,
@@ -139,21 +132,17 @@ function buildParticleData() {
 const PARTICLES = buildParticleData();
 
 /* ═══════════════════════════════════════════════
-   SIZE ARRAY  — determined once, never changes.
-   ~80% small  |  ~12% medium  |  ~8% hub
+   SIZE ARRAY — determined once, never changes
 ═══════════════════════════════════════════════ */
 function buildSizeArray() {
   const sizes = new Float32Array(PARTICLE_COUNT);
   for (let i = 0; i < PARTICLE_COUNT; i++) {
     const r = pr(i * 23 + 7);
     if (r > 0.92) {
-      /* hub — ~8%: large glowing orbs */
       sizes[i] = 0.30 + pr(i * 23 + 8) * 0.18;
     } else if (r > 0.80) {
-      /* medium — ~12% */
       sizes[i] = 0.18 + pr(i * 23 + 9) * 0.09;
     } else {
-      /* small — ~80% */
       sizes[i] = 0.10 + pr(i * 23 + 10) * 0.06;
     }
   }
@@ -171,13 +160,10 @@ const connectionBuf    = new Float32Array(MAX_CONNECTIONS * 6);
 
 /* ═══════════════════════════════════════════════
    BOUNDARY SMOOTH STEERING
-   Instead of hard-flipping, gently nudge velocity
-   toward centre when a particle nears an edge.
 ═══════════════════════════════════════════════ */
 function steerVelocity(pos, vel, limit) {
   const edge = limit * 0.80;
   if (pos > edge) {
-    /* Strength grows from 0→1 as particle goes from edge→limit */
     const strength = (pos - edge) / (limit - edge);
     return vel - strength * Math.abs(vel) * 2.0;
   }
@@ -204,7 +190,7 @@ export default function NetworkSystem() {
 
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
-    const dt   = Math.min(clock.getDelta(), 0.033); /* cap at ~30fps equiv */
+    const dt   = Math.min(clock.getDelta(), 0.033);
 
     /* ────────────────────────────────────────────
        1. UPDATE PARTICLES
@@ -212,12 +198,10 @@ export default function NetworkSystem() {
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const p = PARTICLES[i];
 
-      /* ── Staggered direction change → pick new target velocity ── */
       if (time >= p.nextChangeAt) {
         const tBucket = Math.floor(time / p.changeInterval);
         const seed    = i * 31 + tBucket * 97;
 
-        /* New random direction, scaled to this particle's speed */
         const ndx = pr(seed + 1) - 0.5;
         const ndy = pr(seed + 2) - 0.5;
         const ndz = (pr(seed + 3) - 0.5) * 0.8;
@@ -231,22 +215,18 @@ export default function NetworkSystem() {
         p.dirSeed      = pr(seed + 5);
       }
 
-      /* ── Smooth lerp toward target velocity ── */
       p.vx += (p.targetVx - p.vx) * p.lerpRate;
       p.vy += (p.targetVy - p.vy) * p.lerpRate;
       p.vz += (p.targetVz - p.vz) * p.lerpRate;
 
-      /* ── Boundary smooth steering ── */
       p.vx = steerVelocity(p.x, p.vx, BOUNDS.x);
       p.vy = steerVelocity(p.y, p.vy, BOUNDS.y);
       p.vz = steerVelocity(p.z, p.vz, BOUNDS.z);
 
-      /* ── Integrate position ── */
       p.x += p.vx * dt;
       p.y += p.vy * dt;
       p.z += p.vz * dt;
 
-      /* ── Independent per-axis oscillation ── */
       const ox = Math.sin(time * p.oscFreqX + p.oscPhaseX) * p.oscAmpX;
       const oy = Math.sin(time * p.oscFreqY + p.oscPhaseY) * p.oscAmpY;
       const oz = Math.sin(time * p.oscFreqZ + p.oscPhaseZ) * p.oscAmpZ;
@@ -337,11 +317,6 @@ export default function NetworkSystem() {
           />
         </bufferGeometry>
 
-        {/*
-          map must be set for the texture to work.
-          vertexColors=false keeps the gold tint from `color`.
-          sizeAttenuation makes far particles smaller.
-        */}
         <pointsMaterial
           color="#f5e6d3"
           map={GLOW_TEXTURE}

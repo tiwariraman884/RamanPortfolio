@@ -23,6 +23,13 @@
     <meta name="twitter:description" content="Portfolio of Raman Kumar Tiwari — Computer Science student building AI, machine learning, software development, and practical technology projects." />
     <meta name="twitter:image" content="https://raman-portfolio-i6ixs6by1-tiwariraman884-6257s-projects.vercel.app/profile.png" />
 
+    <!-- Preconnect for GitHub APIs (deferred, but DNS warmup reduces latency) -->
+    <link rel="preconnect" href="https://github-contributions-api.jogruber.de" crossorigin />
+    <link rel="preconnect" href="https://api.github.com" crossorigin />
+
+    <!-- LCP: preload the above-the-fold profile image with high priority -->
+    <link rel="preload" as="image" href="/profile.webp" type="image/webp" fetchpriority="high" />
+
     <link
     rel="preload"
     as="image"
