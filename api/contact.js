@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 
     if (data.error) {
       console.error('Resend API Error:', data.error);
-      return res.status(500).json({ error: 'Failed to send email.' });
+      return res.status(500).json({ error: 'Failed to send email.', details: data.error });
     }
 
     // 6. Return success response
@@ -57,6 +57,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Serverless Function Error:', error);
-    return res.status(500).json({ error: 'Internal Server Error.' });
+    return res.status(500).json({ error: 'Internal Server Error.', details: error.message });
   }
 }
