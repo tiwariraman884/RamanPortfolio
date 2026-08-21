@@ -1,24 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../data/projects";
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
+  const sectionRef = useRef(null);
+  const preloadedRef = useRef(false);
 
   useEffect(() => {
-    projects.forEach((project) => {
-      if (!project.image) return;
+    const el = sectionRef.current;
+    if (!el) return;
 
-      const image = new Image();
+    /* Preload project images only when the projects section is near viewport */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !preloadedRef.current) {
+          preloadedRef.current = true;
+          observer.disconnect();
+          projects.forEach((project) => {
+            if (!project.image) return;
+            const img = new Image();
+            img.src = project.image;
+          });
+        }
+      },
+      { rootMargin: "300px" }
+    );
 
-      image.src = project.image;
-    });
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
       id="work"
       className="projects-section"
+      ref={sectionRef}
     >
       <div className="projects-header">
         <div className="section-label">
