@@ -5,8 +5,9 @@ import { useState } from "react";
 export default function Contact() {
   const [formStatus, setFormStatus] = useState("");
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -14,6 +15,7 @@ export default function Contact() {
     const email = formData.get("email")?.trim();
     const subject = formData.get("subject")?.trim();
     const message = formData.get("message")?.trim();
+    const website = formData.get("website"); // honeypot
 
     const newErrors = {};
 
@@ -33,8 +35,27 @@ export default function Contact() {
     }
 
     setErrors({});
-    setFormStatus("MESSAGE SENT ✓\n\nThanks for reaching out. I'll get back to you soon.");
-    event.target.reset();
+    setIsSubmitting(true);
+    setFormStatus("");
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message, website })
+      });
+
+      if (response.ok) {
+        setFormStatus("MESSAGE SENT ✓\n\nThanks — I'll get back to you soon.");
+        event.target.reset();
+      } else {
+        setFormStatus("MESSAGE COULD NOT BE SENT\n\nPlease try again or email:\ntiwariraman884@gmail.com");
+      }
+    } catch (error) {
+      setFormStatus("MESSAGE COULD NOT BE SENT\n\nPlease try again or email:\ntiwariraman884@gmail.com");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -193,8 +214,13 @@ export default function Contact() {
             {errors.message && <span className="form-error">{errors.message}</span>}
           </div>
 
-          <button type="submit" className="contact-submit">
-            <h3>SEND MASSAGE</h3> →
+          <div className="form-row" style={{ display: "none" }}>
+            <label htmlFor="website">Website</label>
+            <input type="text" id="website" name="website" tabIndex="-1" autoComplete="off" />
+          </div>
+
+          <button type="submit" className="contact-submit" disabled={isSubmitting}>
+            <h3>{isSubmitting ? "SENDING..." : "SEND MESSAGE"}</h3> →
           </button>
 
           {formStatus && (
