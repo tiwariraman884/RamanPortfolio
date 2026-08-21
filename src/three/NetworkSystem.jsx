@@ -12,9 +12,9 @@ const CONN_DIST_SQ        = CONNECTION_DISTANCE * CONNECTION_DISTANCE;
 /* Scene bounds — spread across generous volume */
 const BOUNDS = { x: 10, y: 7.5, z: 5 };
 
-/* Speed ranges (units / second) */
-const SPEED_MIN = 4.60;
-const SPEED_MAX = 25.20;
+/* Speed ranges (units / second) — slower, smooth, deliberate for a premium feel */
+const SPEED_MIN = 0.40;
+const SPEED_MAX = 1.20;
 
 /* ═══════════════════════════════════════════════
    DETERMINISTIC PSEUDO-RANDOM
@@ -48,12 +48,11 @@ function makeGlowTexture() {
 
   const half = size / 2;
   const grad = ctx.createRadialGradient(half, half, 0, half, half, half);
-  grad.addColorStop(0.00, "rgba(255, 220, 180, 1.00)"); /* warm light core */
-  grad.addColorStop(0.12, "rgba(230, 170, 100, 1.00)"); /* bright inner brown/tan */
-  grad.addColorStop(0.30, "rgba(190, 120,  60, 0.95)"); /* strong brown mid */
-  grad.addColorStop(0.50, "rgba(150,  90,  40, 0.75)"); /* medium brown glow */
-  grad.addColorStop(0.70, "rgba(110,  60,  20, 0.45)"); /* wide outer brown halo */
-  grad.addColorStop(0.88, "rgba( 80,  40,  10, 0.18)"); /* very soft halo edge */
+  grad.addColorStop(0.00, "rgba(255, 255, 255, 1.00)"); /* pure white core */
+  grad.addColorStop(0.15, "rgba(250, 235, 215, 1.00)"); /* bright champagne inner */
+  grad.addColorStop(0.35, "rgba(220, 190, 150, 0.95)"); /* strong champagne mid */
+  grad.addColorStop(0.60, "rgba(180, 140, 100, 0.70)"); /* wide warm outer glow */
+  grad.addColorStop(0.85, "rgba(130,  90,  60, 0.35)"); /* soft halo edge */
   grad.addColorStop(1.00, "rgba(  0,   0,   0, 0.00)"); /* transparent edge */
 
   ctx.clearRect(0, 0, size, size);
@@ -344,7 +343,7 @@ export default function NetworkSystem() {
           sizeAttenuation makes far particles smaller.
         */}
         <pointsMaterial
-          color="#d28a50"
+          color="#f5e6d3"
           map={GLOW_TEXTURE}
           size={0.22}
           sizeAttenuation
@@ -369,9 +368,9 @@ export default function NetworkSystem() {
         </bufferGeometry>
 
         <lineBasicMaterial
-          color="#8b5a2b"
+          color="#c8a885"
           transparent
-          opacity={0.22}
+          opacity={0.15}
           depthWrite={false}
         />
       </lineSegments>
