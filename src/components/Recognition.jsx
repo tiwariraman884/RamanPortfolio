@@ -127,7 +127,7 @@ export default function Recognition() {
             <div className="recognition-main">
               <h3>{item.title}</h3>
 
-              <p>{item.description}</p>
+              <p><h4>{item.description}</h4></p>
 
               {item.linkedin !== "#" && (
                 <a

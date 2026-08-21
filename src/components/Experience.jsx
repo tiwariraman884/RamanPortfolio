@@ -3,17 +3,17 @@ import { motion } from "framer-motion";
 const experiences = [
   {
     period: "2026 — PRESENT",
-    role: "PROJECT-BASED SOFTWARE DEVELOPMENT",
+    role: "PROJECT-BASED WEB DEVELOPMENT",
     organization: "AI · WEB DEVELOPMENT · MACHINE LEARNING",
     description:
-      "Building practical software projects across artificial intelligence, machine learning, frontend development, backend APIs, and full-stack workflows.",
+      "Building practical web projects across artificial intelligence, machine learning, frontend development, backend APIs, and full-stack workflows.",
   },
   {
     period: "2026",
     role: "TEAM LEAD — IBM Z DATATHON",
-    organization: "FIVE-MEMBER TECHNICAL TEAM",
+    organization: "SIX-MEMBER TECHNICAL TEAM",
     description:
-      "Led a five-member team while developing an AI/ML-based credit card fraud detection system with a Random Forest model and FastAPI prediction backend.",
+      "Led a six-member team while developing an AI/ML-based credit card fraud detection system with a Random Forest model and FastAPI prediction backend.",
   },
   {
     period: "2025 — PRESENT",

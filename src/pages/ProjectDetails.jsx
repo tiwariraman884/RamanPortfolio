@@ -290,7 +290,7 @@ export default function ProjectDetails() {
 
                   {index !==
                     project.architecture.length - 1 && (
-                    <b>↓</b>
+                    <b><strong>↓</strong></b>
                   )}
                 </div>
               )
@@ -311,8 +311,9 @@ export default function ProjectDetails() {
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-        >
+        ><h6>
           VIEW ON GITHUB ↗
+          </h6>
         </a>
       </section>
 

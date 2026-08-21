@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+
 export default function Status() {
   return (
     <section className="editorial-section status-section">
@@ -40,7 +41,9 @@ export default function Status() {
         <div className="status-meta">
           <span>OPEN TO</span>
           <strong>
+            <h4>
             HACKATHONS · COLLABORATION · INTERESTING PRODUCTS
+            </h4>
           </strong>
         </div>
       </motion.div>
