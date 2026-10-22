@@ -2,11 +2,25 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
+    period: "JUL 2026 — SEP 2026",
+    role: "FULL-STACK WEB DEVELOPMENT INTERN",
+    organization: "UNIFIED MENTOR",
+    description:
+      "Completed a structured internship focused on HTML, CSS, JavaScript, React.js, Node.js, and Tailwind CSS — building frontend and backend workflows for practical web applications, including API integration and responsive UI implementation.",
+  },
+  {
     period: "2026 — PRESENT",
     role: "PROJECT-BASED WEB DEVELOPMENT",
     organization: "AI · WEB DEVELOPMENT · MACHINE LEARNING",
     description:
       "Building practical web projects across artificial intelligence, machine learning, frontend development, backend APIs, and full-stack workflows.",
+  },
+  {
+    period: "2026",
+    role: "TEAM LEAD — SMART INDIA HACKATHON (SIH)",
+    organization: "SIX-MEMBER TECHNICAL TEAM",
+    description:
+      "Led a six-member team, coordinating collaboration, task allocation, and solution development.",
   },
   {
     period: "2026",

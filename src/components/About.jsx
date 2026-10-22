@@ -19,9 +19,10 @@ export default function About() {
         }}
       >
         <p>
-          Hey! I'm a 2nd Year B.Tech Computer Science student at Roorkee Institute of
-          Technology, focused on software development, artificial intelligence,
-          and building technology that solves practical problems.
+          Hey! I'm a 2nd Year B.Tech Computer Science and Engineering student at
+          Roorkee Institute of Technology, focused on full-stack development,
+          artificial intelligence, and building technology that solves practical
+          problems.
         </p>
 
         <p>
@@ -32,8 +33,8 @@ export default function About() {
 
         <p>
           My current focus is strengthening my foundations in JavaScript,
-          React, backend development, machine learning, and DSA through
-          hands-on projects and continuous practice.
+          TypeScript, React/Next.js, backend development, machine learning,
+          and DSA through hands-on projects and continuous practice.
         </p>
 
         <div className="about-highlight">

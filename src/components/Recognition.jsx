@@ -57,7 +57,16 @@ const recognitions = [
     title: "AESTER ALPHA AI SUMMIT",
     result: "TOP 30",
     description:
-      "Recognized among the top participants/projects in an AI-focused event.",
+      "Recognized among the top 30 participants/projects in an AI-focused event.",
+    linkedin: "#",
+  },
+
+  {
+    year: "2026",
+    title: "BUILDATHON — ADYA AI LAUNCH LAB",
+    result: "PARTICIPANT",
+    description:
+      "Participated in BUILDATHON, a build-focused event hosted by Adya AI Launch Lab.",
     linkedin: "#",
   },
 
@@ -66,7 +75,7 @@ const recognitions = [
     title: "IBM Z DATATHON",
     result: "TEAM LEAD",
     description:
-      "Led a five-member team while building an AI/ML-based credit card fraud detection solution.",
+      "Led a five-member team, coordinating task distribution and project integration while contributing to the ML pipeline, backend/API work, and presentation.",
     linkedin: "https://www.linkedin.com/posts/raman-kumar-tiwari-698064370_an-impactful-weekend-of-innovation-and-problem-solving-activity-7427388867068022786-k2Vi?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFvYRNQBWeCQoPbpW6fbU0BI7FKw2Iv65mY",
   },
 
@@ -76,7 +85,7 @@ const recognitions = [
     result: "RANK 1302",
     description:
       "Participated in Smart India Hackathon with a problem-focused technology solution.",
-    linkedin: "https://www.linkedin.com/posts/raman-kumar-tiwari-698064370_sidequest-promptwars-hack2skill-activity-7469062953410117633-GuBP?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFvYRNQBWeCQoPbpW6fbU0BI7FKw2Iv65mY",
+    linkedin: "https://lnkd.in/p/gyuUqc9d",
   },
 
   {

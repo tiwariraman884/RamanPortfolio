@@ -98,13 +98,19 @@ export default function Certifications() {
                 <p>
                   {certificate.issuer} · {certificate.year}
                 </p>
+
+                {certificate.credentialId && (
+                  <p className="certificate-credential-id">
+                    ID · {certificate.credentialId}
+                  </p>
+                )}
               </div>
               {/* Optional credential link logic to stop propagation */}
               {certificate.url && (
-                <a 
-                  href={certificate.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={certificate.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="certificate-link"
                   onClick={(e) => e.stopPropagation()}
                 >
@@ -160,6 +166,12 @@ export default function Certifications() {
               <div className="certificate-modal-caption">
                 <h4>{certifications[selectedIndex].title}</h4>
                 <p>{certifications[selectedIndex].issuer}</p>
+
+                {certifications[selectedIndex].credentialId && (
+                  <p className="certificate-credential-id">
+                    CREDENTIAL ID · {certifications[selectedIndex].credentialId}
+                  </p>
+                )}
               </div>
 
               <div className="certificate-modal-nav">

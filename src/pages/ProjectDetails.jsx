@@ -130,6 +130,7 @@ export default function ProjectDetails() {
           PROJECT SCREENSHOT
       ================================================== */}
 
+      {project.image && (
       <section className="project-detail-image-section">
         <motion.div
           className="project-detail-image-wrapper"
@@ -153,6 +154,7 @@ export default function ProjectDetails() {
           />
         </motion.div>
       </section>
+      )}
 
 
       {/* ==================================================

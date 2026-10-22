@@ -4,10 +4,12 @@ const skills = [
     category: "LANGUAGES",
     items: [
       "JavaScript",
+      "TypeScript",
       "Python",
+      "C++",
       "C",
-      "HTML",
-      "CSS",
+      "HTML5",
+      "CSS3",
     ],
   },
 
@@ -16,21 +18,27 @@ const skills = [
     category: "FRONTEND",
     items: [
       "React",
+      "Next.js",
+      "React Native",
       "Vite",
       "Tailwind CSS",
-      "Responsive UI",
+      "Responsive Web Design",
     ],
   },
 
   {
     id: "03",
-    category: "BACKEND",
+    category: "BACKEND & DATA",
     items: [
       "Node.js",
+      "Express.js",
       "FastAPI",
       "REST APIs",
+      "Server-Sent Events",
       "MongoDB",
       "PostgreSQL",
+      "Supabase",
+      "SQLite",
     ],
   },
 
@@ -40,32 +48,36 @@ const skills = [
     items: [
       "Scikit-learn",
       "Random Forest",
+      "Isolation Forest",
       "OCR",
       "Computer Vision",
-      "AI APIs",
+      "Google Gemini",
+      "Ollama",
     ],
   },
 
   {
     id: "05",
-    category: "TOOLS & PLATFORM",
+    category: "TOOLS & CLOUD",
     items: [
       "Git",
       "GitHub",
       "VS Code",
       "Vercel",
-      "Supabase",
+      "PostHog",
+      "Jest",
     ],
   },
 
   {
     id: "06",
-    category: "CURRENTLY LEARNING",
+    category: "CORE CS",
     items: [
-      "TypeScript",
-      "React Native",
-      "DSA",
-      "Advanced Backend Development",
+      "Data Structures & Algorithms",
+      "OOP",
+      "DBMS",
+      "Computer Networks",
+      "Operating Systems",
     ],
   },
 ];

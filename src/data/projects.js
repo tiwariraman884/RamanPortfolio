@@ -1,6 +1,59 @@
 const projects = [
     {
         id: "01",
+        slug: "deepsea-guardian",
+        title: "DeepSea Guardian",
+        category: "SENSOR-DRIVEN OCEAN MONITORING",
+        image: "/images/projects/DeepSea-Guardian.webp",
+
+        shortDescription:
+            "An ocean-monitoring prototype that ingests live sensor data from ESP32 buoys, flags anomalies with an Isolation Forest model, and streams alerts to a real-time inspection dashboard.",
+
+        technologies: [
+            "• Next.js",
+            "• Express + TypeScript",
+            "• Python",
+            "• Scikit-learn",
+            "• SQLite",
+            "• Server-Sent Events",
+            "• ESP32",
+            "• MobileNetV3",
+        ],
+
+        overview:
+            "DeepSea Guardian is an ocean-monitoring prototype that connects hardware and software into a single inspection workflow. ESP32 sensor nodes stream environmental readings into an ingestion API, an Isolation Forest model trained in Python scores every reading for anomalies, and the results are persisted in SQLite and pushed to a Next.js dashboard over Server-Sent Events. Operators can select a drone, dispatch it to a flagged location, and follow simulated inspection stages through to evidence capture.",
+
+        problem:
+            "Ocean and freshwater monitoring is usually manual, slow, and reactive — by the time a water-quality problem is spotted, the data trail needed to act on it has often been lost. Sensor networks produce continuous streams of readings, but without anomaly detection and a live operational view, that data is hard to turn into a timely decision. DeepSea Guardian addresses this gap by pairing sensor ingestion with automated anomaly detection and a real-time inspection interface.",
+
+        solution:
+            "DeepSea Guardian combines sensor ingestion, machine learning, and real-time delivery. Express/TypeScript APIs receive readings from ESP32 nodes and persist them to SQLite alongside generated alerts. An Isolation Forest pipeline scores incoming readings and flags deviations from normal operating ranges. The dashboard subscribes to Server-Sent Events so alerts appear without polling, and includes drone selection, dispatch logic, and simulated inspection stages. Authentication and configuration paths were hardened and verified against invalid, expired, malformed, and missing tokens. A MobileNetV3 sample-frame analysis path and evidence-capture states support simulated camera inspections.",
+
+        features: [
+            "Sensor Ingestion API — Express/TypeScript endpoints receive readings from ESP32 nodes.",
+            "Anomaly Detection — Isolation Forest pipeline scores readings and raises alerts.",
+            "Real-Time Dashboard — Server-Sent Events push alerts and updates without polling.",
+            "Drone Dispatch — Operators select and dispatch a drone to flagged locations.",
+            "Simulated Inspection Stages — Tracks an inspection from dispatch through evidence capture.",
+            "Frame Analysis — MobileNetV3 sample-frame analysis path for simulated camera inspections.",
+            "Hardened Authentication — Verified rejection of invalid, expired, malformed, and missing tokens.",
+        ],
+
+        architecture: [
+            "ESP32 Sensor Node",
+            "Ingestion API",
+            "SQLite Storage",
+            "Isolation Forest Model",
+            "Alert Generation",
+            "Server-Sent Events",
+            "Inspection Dashboard",
+        ],
+
+        github: "https://github.com/tiwariraman884/DeepSee.git",
+    },
+
+    {
+        id: "02",
         slug: "ibm-z-fraud-detection",
         title: "IBM Z Fraud Detection",
         category: "REAL-TIME CREDIT CARD FRAUD DETECTION",
@@ -53,7 +106,7 @@ const projects = [
     },
 
     {
-        id: "02",
+        id: "03",
         slug: "nutriguard",
         title: "NutriGuard",
         category: "AI-POWERED FOOD SAFETY & NUTRITION",
@@ -104,7 +157,7 @@ const projects = [
     },
 
     {
-        id: "03",
+        id: "04",
         slug: "greenstep-india",
         title: "GreenStep India",
         category: "CARBON FOOTPRINT & RENEWABLE TRACKING",
@@ -155,7 +208,7 @@ const projects = [
     },
 
     {
-        id: "04",
+        id: "05",
         slug: "freshwater-health-monitor",
         title: "Freshwater Health Monitor",
         category: "REAL-TIME WATER QUALITY MONITORING",

@@ -10,8 +10,9 @@ const certifications = [
 
     {
         id: "02",
-        title: "BUILD WITH AI",
-        issuer: "AI / Technology Program",
+        title: "SOLUTION CHALLENGE 2026 — BUILD WITH AI",
+        issuer: "Google · Hack2skill",
+        credentialId: "2026H2S07SCBWAI-PS03587",
         year: "2026",
         thumbnail: "/images/certificates/build-with-ai.webp",
         full: "/images/certificates/build-with-ai-full.webp",

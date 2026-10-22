@@ -9,7 +9,7 @@ const navItems = [
 ];
 
 const RESUME_URL =
-  "https://drive.google.com/file/d/1Jc1ZbQGYGFF40yneorPwTcV0qpUrqbw0/view?usp=sharing";
+  "https://drive.google.com/file/d/1PEhc6TMhCU8YfA9IObNeOYjPn_iT4Gyu/view?usp=sharing";
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("top");
