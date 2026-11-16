@@ -51,7 +51,7 @@ export default function Contact() {
       } else {
         setFormStatus("MESSAGE COULD NOT BE SENT\n\nPlease try again or email:\ntiwariraman884@gmail.com");
       }
-    } catch (error) {
+    } catch {
       setFormStatus("MESSAGE COULD NOT BE SENT\n\nPlease try again or email:\ntiwariraman884@gmail.com");
     } finally {
       setIsSubmitting(false);

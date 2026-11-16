@@ -1138,7 +1138,8 @@ a {
 
 .preview-image {
   width: 100%;
-  height: 180px;
+
+  aspect-ratio: 16 / 9;
 
   background: #101010;
 
@@ -1150,6 +1151,7 @@ a {
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   display: block;
 }
@@ -3221,7 +3223,6 @@ a {
   }
 }
 
-
 /* =========================
    CUSTOM CIRCULAR CURSOR
 ========================= */
@@ -4262,11 +4263,13 @@ body {
 
 .project-detail-image {
   width: 100%;
-  height: auto;
+
+  aspect-ratio: 16 / 9;
 
   display: block;
 
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
 
   filter:
     grayscale(15%)

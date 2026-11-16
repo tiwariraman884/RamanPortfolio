@@ -4,7 +4,7 @@ const projects = [
         slug: "deepsea-guardian",
         title: "DeepSea Guardian",
         category: "SENSOR-DRIVEN OCEAN MONITORING",
-        image: "/images/projects/DeepSea-Guardian.webp",
+        image: "/images/projects/01_DeepSea_Guardian.png",
 
         shortDescription:
             "An ocean-monitoring prototype that ingests live sensor data from ESP32 buoys, flags anomalies with an Isolation Forest model, and streams alerts to a real-time inspection dashboard.",
@@ -55,9 +55,9 @@ const projects = [
     {
         id: "02",
         slug: "ibm-z-fraud-detection",
-        title: "IBM Z Fraud Detection",
+        title: "CardSentinel",
         category: "REAL-TIME CREDIT CARD FRAUD DETECTION",
-        image: "/images/projects/IBM-Z-Fraud.webp",
+        image: "/images/projects/02_CardSentinel.png",
 
         shortDescription:
             "A machine-learning based fraud detection system that evaluates financial transactions and returns real-time fraud risk predictions through a FastAPI backend.",
@@ -107,10 +107,10 @@ const projects = [
 
     {
         id: "03",
-        slug: "nutriguard",
-        title: "NutriGuard",
+        slug: "food-safety-health-hub",
+        title: "Food Safety & Health Hub",
         category: "AI-POWERED FOOD SAFETY & NUTRITION",
-        image: "/images/projects/NutriGuard.webp",
+        image: "/images/projects/03_Food_Safety_Health_Hub.png",
 
         shortDescription:
             "A food intelligence platform exploring OCR, barcode scanning, nutrition analysis, and AI-assisted guidance to help users make safer and more informed food choices.",
@@ -161,7 +161,7 @@ const projects = [
         slug: "greenstep-india",
         title: "GreenStep India",
         category: "CARBON FOOTPRINT & RENEWABLE TRACKING",
-        image: "/images/projects/GreenStep.webp",
+        image: "/images/projects/04_GreenStep.png",
         shortDescription:
             "A web platform designed to help users understand and reduce their environmental impact through carbon-footprint tracking and practical sustainability guidance.",
 
@@ -212,7 +212,7 @@ const projects = [
         slug: "freshwater-health-monitor",
         title: "Freshwater Health Monitor",
         category: "REAL-TIME WATER QUALITY MONITORING",
-        image: "/images/projects/Freshwater.webp",
+        image: "/images/projects/05_FreshWatch.png",
 
         shortDescription:
             "A citizen-driven platform for reporting freshwater pollution, sharing observations, uploading evidence, and tracking the health of local water bodies.",

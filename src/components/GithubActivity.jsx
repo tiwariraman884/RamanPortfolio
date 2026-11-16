@@ -197,7 +197,6 @@ export default function GithubActivity() {
         clearInterval(el._ghRefreshInterval);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const weeks = useMemo(
